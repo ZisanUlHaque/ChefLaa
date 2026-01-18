@@ -1,2 +1,53 @@
+
+
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
-@plugin "daisyui";
+
+/* DaisyUI enabled with light (default) + dark theme */
+@plugin "daisyui" {
+  themes: light --default, dark;
+}
+
+/* Custom LIGHT theme using your brand colors */
+@plugin "daisyui/theme" {
+  name: "light";
+
+  --color-primary: #1B4332;   /* Forest Green */
+  --color-secondary: #D8F3DC; /* Fresh Mint */
+  --color-accent: #FF7043;    /* Sunset Orange */
+  --color-neutral: #2D3436;   /* Dark Grey Text */
+  --color-base-100: #ffffff;
+}
+
+/* Custom DARK theme aligned to your palette */
+@plugin "daisyui/theme" {
+  name: "dark";
+
+  --color-primary: #D8F3DC;
+  --color-secondary: #1B4332;
+  --color-accent: #FF7043;
+  --color-neutral: #E5E7EB;
+  --color-base-100: #020617;
+}
+
+:root {
+  font-family: "Urbanist", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+}
+
+/* Brand palette (for reference only)
+   Primary (Forest Green): #1B4332  - trust & freshness
+   Secondary (Fresh Mint): #D8F3DC  - backgrounds / light elements
+   Accent (Sunset Orange): #FF7043  - buttons & CTAs (boosts appetite)
+   Text (Dark Gray):       #2D3436
+*/
+
+* {
+  scroll-behavior: smooth;
+}

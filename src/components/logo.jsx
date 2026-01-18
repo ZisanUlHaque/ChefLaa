@@ -1,12 +1,18 @@
 import React from 'react';
-import Logo from '../assets/Logo.png'
+import logo from '../assets/Logo.png'
+import { Link } from 'react-router';
 
-const logo = () => {
+const Logo = () => {
     return (
-        <div>
-            <img src={Logo} alt="" />
-        </div>
+    <Link to="/">
+      <div className="flex items-center">
+        <img src={logo} alt="" className="h-13 w-13" />
+        <h2 className="text-3xl font-bold text-black mb-3">
+          Chef<span className="text-primary">laa</span>
+        </h2>
+      </div>
+    </Link>
     );
 };
 
-export default logo;
+export default Logo;
