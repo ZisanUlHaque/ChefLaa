@@ -31,13 +31,14 @@ const Navbar = () => {
   return (
     <div
       className="
-        navbar sticky top-0 z-30 mx-auto mt-3 max-w-6xl
+        navbar sticky top-0 z-30 mx-auto mt-3 max-w-7xl
         rounded-2xl border border-white/15
-        bg-white/10 text-slate-900
+        bg-white/10
         shadow-[0_18px_60px_rgba(15,23,42,0.75)]
         backdrop-blur-xl
         px-4
-        dark:bg-slate-900/70 dark:text-slate-50
+        text-slate-100
+        dark:bg-slate-900/70 dark:text-slate-100
         transition-colors duration-300
       "
     >
@@ -48,7 +49,7 @@ const Navbar = () => {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle"
+            className="btn btn-ghost btn-circle text-slate-100"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -94,12 +95,8 @@ const Navbar = () => {
           href="/"
           className="flex items-center gap-2 text-sm font-semibold tracking-tight"
         >
-          <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-[#FF7043] to-[#FFD1A3] shadow-lg shadow-[#FF7043]/45">
-            <img
-              src={logo}
-              alt="ChefLaa logo"
-              className="h-7 w-7 object-contain"
-            />
+          <div className="flex h-10 w-15 items-center justify-center">
+            <img src={logo} alt="ChefLaa logo" className=" object-contain" />
           </div>
           <div className="flex flex-col leading-tight">
             <span className="text-sm sm:text-base">ChefLaa</span>
@@ -114,22 +111,25 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal gap-4 px-1 text-sm font-medium">
           <li>
-            <a href="#features" className="hover:text-base-content">
+            <a href="#features" className="text-slate-100/80 hover:text-white">
               Features
             </a>
           </li>
           <li>
-            <a href="#how-it-works" className="hover:text-base-content">
+            <a
+              href="#how-it-works"
+              className="text-slate-100/80 hover:text-white"
+            >
               How it works
             </a>
           </li>
           <li>
-            <a href="#pricing" className="hover:text-base-content">
+            <a href="#pricing" className="text-slate-100/80 hover:text-white">
               Pricing
             </a>
           </li>
           <li>
-            <a href="#faq" className="hover:text-base-content">
+            <a href="#faq" className="text-slate-100/80 hover:text-white">
               FAQ
             </a>
           </li>
@@ -143,7 +143,7 @@ const Navbar = () => {
           type="button"
           onClick={toggleTheme}
           aria-label="Toggle dark and light mode"
-          className="btn btn-ghost btn-circle"
+          className="btn btn-ghost btn-circle text-slate-100"
         >
           <SunIcon
             className={`h-5 w-5 transition-opacity ${
@@ -157,7 +157,7 @@ const Navbar = () => {
           />
         </button>
 
-        <button className="btn btn-ghost btn-sm hidden md:inline-flex">
+        <button className="btn btn-ghost btn-sm hidden md:inline-flex text-slate-100/85">
           Log in
         </button>
 

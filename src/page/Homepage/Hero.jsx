@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 
-
 const BG_IMAGES = [
   "https://i.ibb.co/MkYpFV0w/premium-photo-1661753714897-78668e8bd101.avif",
   "https://i.ibb.co/rKngytLz/sharon-pittaway-KUZnfk-2-DSQ-unsplash.jpg",
@@ -14,7 +13,7 @@ const BG_IMAGES = [
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Preload images
+  // Preload background images
   useEffect(() => {
     BG_IMAGES.forEach((src) => {
       const img = new Image();
@@ -22,11 +21,11 @@ const Hero = () => {
     });
   }, []);
 
-  // Auto slider
+  // Auto background slider
   useEffect(() => {
     const interval = setInterval(
       () => setCurrentIndex((prev) => (prev + 1) % BG_IMAGES.length),
-      6000
+      6000,
     );
     return () => clearInterval(interval);
   }, []);
@@ -58,7 +57,7 @@ const Hero = () => {
       </div>
 
       {/* Hero content */}
-      <div className="relative z-20 mx-auto flex min-h-[calc(100vh-72px)] max-w-6xl flex-col-reverse items-center gap-10 px-4 pb-16 pt-6 sm:px-6 lg:flex-row lg:pb-24 lg:pt-10">
+      <div className="relative z-20 mx-auto flex min-h-[calc(100vh-72px)] max-w-7xl flex-col-reverse items-center gap-10 px-4 pb-16 pt-6 sm:px-6 lg:flex-row lg:items-center lg:pb-24 lg:pt-10">
         {/* Left: text */}
         <div className="w-full space-y-7 lg:w-1/2">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/40 px-3 py-1 text-[11px] font-medium text-slate-100 shadow-sm shadow-black/70 backdrop-blur">
@@ -66,7 +65,7 @@ const Hero = () => {
             <span>New • Turn fridge chaos into clarity</span>
           </div>
 
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-50 sm:text-4xl md:text-[2.9rem]">
+          <h1 className="text-4xl font-extrabold tracking-tight text-slate-50 sm:text-4xl md:text-[4rem]">
             Turn fridge chaos{" "}
             <span className="bg-gradient-to-r from-[#FF7043] via-[#FFD1A3] to-[#D8F3DC] bg-clip-text text-transparent">
               into chef‑level meals.
@@ -81,7 +80,7 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <button className="inline-flex items-center justify-center rounded-full bg-[#FF7043] px-6 py-3 text-sm font-semibold text-[#2D3436] shadow-lg shadow-[#FF7043]/55 transition hover:-translate-y-0.5 hover:bg-[#ff865f] focus:outline-none focus:ring-2 focus:ring-[#FF7043] focus:ring-offset-2 focus:ring-offset-[#1B4332]">
+            <button className="inline-flex items-center justify-center rounded-full bg-[#FF7043] px-3 py-3 text-sm font-semibold text-[#2D3436] shadow-lg shadow-[#FF7043]/55 transition hover:-translate-y-0.5 hover:bg-[#ff865f] focus:outline-none focus:ring-2 focus:ring-[#FF7043] focus:ring-offset-2 focus:ring-offset-[#1B4332]">
               Start a free scan
             </button>
 
@@ -91,7 +90,7 @@ const Hero = () => {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 pt-2 text-[11px] text-slate-200/90 sm:text-xs">
+          <div className="flex flex-wrap items-center gap-4 pt-2 text-2xl text-slate-200/90 sm:text-xs">
             <span className="inline-flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-[#D8F3DC]" />
               No credit card or sign‑up required
@@ -108,12 +107,12 @@ const Hero = () => {
         </div>
 
         {/* Right: premium card */}
-        <div className="relative flex w-full justify-center lg:w-1/2">
-          <div className="absolute inset-0 -z-10 flex items-center justify-center">
-            <div className="h-64 w-64 rounded-full bg-[#FF7043]/25 blur-3xl" />
+        <div className="relative flex w-full justify-center lg:w-1/2 lg:justify-end lg:pr-2">
+          <div className="absolute inset-0 -z-10 flex items-center justify-center lg:justify-end">
+            <div className="h-64 w-64 rounded-full bg-[#FF7043]/25 blur-3xl lg:mr-6" />
           </div>
 
-          <div className="relative w-full max-w-sm">
+          <div className="relative w-full max-w-sm lg:mr-4">
             <div className="rounded-[2rem] border border-white/12 bg-black/55 p-[1.5px] shadow-2xl shadow-black/70 backdrop-blur-xl">
               <div className="rounded-[1.8rem] border border-white/10 bg-gradient-to-b from-white/6 via-[#1B4332]/55 to-slate-950/95 p-4">
                 <div className="mb-4 flex items-center justify-between">
@@ -132,7 +131,7 @@ const Hero = () => {
 
                 <div className="relative mb-4 overflow-hidden rounded-2xl border border-white/12">
                   <img
-                    src={BG_IMAGES[2]}
+                    src={BG_IMAGES[1]}
                     alt="Fresh ingredients being scanned by ChefLaa"
                     className="h-40 w-full object-cover"
                     loading="lazy"
@@ -168,9 +167,7 @@ const Hero = () => {
                     <p className="mb-1 text-[11px] text-slate-300">
                       Shopping impact
                     </p>
-                    <p className="text-lg font-semibold text-[#FF7043]">
-                      −28%
-                    </p>
+                    <p className="text-lg font-semibold text-[#FF7043]">−28%</p>
                     <p className="mt-1 text-[10px] text-slate-400">
                       Avg. food waste reduction for weekly users.
                     </p>
@@ -179,7 +176,8 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="absolute -right-2 -top-4 w-40 rounded-2xl border border-white/18 bg-black/80 p-3 text-[11px] text-slate-100 shadow-xl shadow-black/80 backdrop-blur">
+            {/* আগে -right-2 ছিল, এখন ভেতরে আনা হয়েছে */}
+            <div className="absolute right-0 -top-3 lg:-top-12 w-40 rounded-2xl border border-white/18 bg-black/80 p-3 text-[11px] text-slate-100 shadow-xl shadow-black/80 backdrop-blur sm:right-2">
               <p className="mb-1 text-[11px] text-slate-300">Smart vision</p>
               <p className="text-sm font-semibold">30+ ingredients</p>
               <p className="mt-1 text-[10px] text-slate-400">
