@@ -1,3 +1,4 @@
+// src/page/Homepage/Hero.jsx (path তোমার প্রজেক্ট অনুযায়ী ঠিক করবে)
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 
@@ -13,7 +14,7 @@ const BG_IMAGES = [
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Preload background images
+  // Preload background images (fast swap)
   useEffect(() => {
     BG_IMAGES.forEach((src) => {
       const img = new Image();
@@ -25,13 +26,14 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(
       () => setCurrentIndex((prev) => (prev + 1) % BG_IMAGES.length),
-      6000,
+      6000
     );
     return () => clearInterval(interval);
   }, []);
 
   return (
-<section className="relative overflow-x-hidden overflow-y-visible bg-[#1B4332] text-slate-50">      {/* Background slider */}
+    <section className="relative overflow-x-hidden overflow-y-visible bg-[#1B4332] text-slate-50">
+      {/* Background slider */}
       <div className="absolute inset-0 z-0">
         {BG_IMAGES.map((src, index) => (
           <div
@@ -51,9 +53,7 @@ const Hero = () => {
       <div className="pointer-events-none absolute bottom-0 right-[-6rem] z-[4] h-80 w-80 rounded-full bg-[#D8F3DC]/22 mix-blend-screen blur-3xl" />
 
       {/* Navbar on top */}
-      <div className="relative z-20">
-        <Navbar />
-      </div>
+      <Navbar />
 
       {/* Hero content */}
       <div className="relative z-20 mx-auto flex min-h-[calc(100vh-72px)] max-w-7xl flex-col-reverse items-center gap-10 px-4 pb-16 pt-6 sm:px-6 lg:flex-row lg:items-center lg:pb-24 lg:pt-10">
@@ -107,6 +107,7 @@ const Hero = () => {
 
         {/* Right: premium card */}
         <div className="relative flex w-full justify-center lg:w-1/2 lg:justify-end lg:pr-2">
+          {/* glow */}
           <div className="absolute inset-0 -z-10 flex items-center justify-center lg:justify-end">
             <div className="h-64 w-64 rounded-full bg-[#FF7043]/25 blur-3xl lg:mr-6" />
           </div>
@@ -114,6 +115,7 @@ const Hero = () => {
           <div className="relative w-full max-w-sm lg:mr-4">
             <div className="rounded-[2rem] border border-white/12 bg-black/55 p-[1.5px] shadow-2xl shadow-black/70 backdrop-blur-xl">
               <div className="rounded-[1.8rem] border border-white/10 bg-gradient-to-b from-white/6 via-[#1B4332]/55 to-slate-950/95 p-4">
+                {/* header */}
                 <div className="mb-4 flex items-center justify-between">
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.18em] text-slate-200/80">
@@ -128,6 +130,7 @@ const Hero = () => {
                   </span>
                 </div>
 
+                {/* image */}
                 <div className="relative mb-4 overflow-hidden rounded-2xl border border-white/12">
                   <img
                     src={BG_IMAGES[1]}
@@ -150,6 +153,7 @@ const Hero = () => {
                   </div>
                 </div>
 
+                {/* stats */}
                 <div className="grid grid-cols-2 gap-3 text-[11px] text-slate-100">
                   <div className="rounded-xl border border-white/14 bg-black/45 p-3">
                     <p className="mb-1 text-[11px] text-slate-300">
@@ -166,7 +170,9 @@ const Hero = () => {
                     <p className="mb-1 text-[11px] text-slate-300">
                       Shopping impact
                     </p>
-                    <p className="text-lg font-semibold text-[#FF7043]">−28%</p>
+                    <p className="text-lg font-semibold text-[#FF7043]">
+                      −28%
+                    </p>
                     <p className="mt-1 text-[10px] text-slate-400">
                       Avg. food waste reduction for weekly users.
                     </p>
@@ -175,6 +181,7 @@ const Hero = () => {
               </div>
             </div>
 
+            {/* floating small card */}
             <div className="absolute right-0 -top-3 lg:-top-12 w-40 rounded-2xl border border-white/18 bg-black/80 p-3 text-[11px] text-slate-100 shadow-xl shadow-black/80 backdrop-blur sm:right-2">
               <p className="mb-1 text-[11px] text-slate-300">Smart vision</p>
               <p className="text-sm font-semibold">30+ ingredients</p>

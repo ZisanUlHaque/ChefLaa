@@ -29,143 +29,162 @@ const Navbar = () => {
   };
 
   return (
-    <div
-      className="
-        navbar sticky top-0 z-30 mx-auto mt-3 max-w-7xl
-        rounded-2xl border border-white/15
-        bg-white/10
-        shadow-[0_18px_60px_rgba(15,23,42,0.75)]
-        backdrop-blur-xl
-        px-4
-        text-slate-100
-        dark:bg-slate-900/70 dark:text-slate-100
-        transition-colors duration-300
-      "
-    >
-      {/* LEFT: Mobile menu + brand */}
-      <div className="navbar-start gap-2">
-        {/* Mobile dropdown */}
-        <div className="dropdown lg:hidden">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle text-slate-100"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <header className="sticky top-0 z-[60] flex justify-center px-4 pt-3">
+      {/* Glass navbar card */}
+      <div
+        className="
+          navbar w-full max-w-7xl
+          rounded-2xl border border-white/15
+          bg-white/10
+          shadow-[0_18px_60px_rgba(15,23,42,0.75)]
+          backdrop-blur-xl
+          px-4
+          text-slate-100
+          dark:bg-slate-900/70 dark:text-slate-100
+          transition-colors duration-300
+          overflow-visible
+        "
+      >
+        {/* LEFT: Mobile menu + brand */}
+        <div className="navbar-start gap-2">
+          {/* Mobile dropdown */}
+          <div className="dropdown lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle text-slate-100"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h7"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="
+                menu menu-sm dropdown-content
+                mt-3 w-52 rounded-2xl border border-white/15
+                bg-base-100/90 shadow-xl backdrop-blur-xl
+                z-[80] p-2
+              "
+            >
+              <li>
+                <a href="#features">Features</a>
+              </li>
+              <li>
+                <a href="#how-it-works">How it works</a>
+              </li>
+              <li>
+                <a href="#pricing">Pricing</a>
+              </li>
+              <li>
+                <a href="#faq">FAQ</a>
+              </li>
+            </ul>
           </div>
-          <ul
-            tabIndex={0}
-            className="
-              menu menu-sm dropdown-content
-              mt-3 w-52 rounded-2xl border border-white/15
-              bg-base-100/90 shadow-xl backdrop-blur-xl
-              z-[50] p-2
-            "
+
+          {/* Brand */}
+          <a
+            href="/"
+            className="flex items-center gap-2 text-sm font-semibold tracking-tight"
           >
+            <div className="flex h-10 items-center justify-center">
+              <img
+                src={logo}
+                alt="ChefLaa logo"
+                className="h-9 w-auto object-contain"
+              />
+            </div>
+            <div className="flex flex-col leading-tight">
+              <span className="text-sm sm:text-base text-slate-100">
+                ChefLaa
+              </span>
+              <span className="text-[11px] text-slate-200/80 sm:text-xs">
+                AI-native kitchen copilot
+              </span>
+            </div>
+          </a>
+        </div>
+
+        {/* CENTER: Desktop links */}
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal gap-4 px-1 text-sm font-medium">
             <li>
-              <a href="#features">Features</a>
+              <a
+                href="#features"
+                className="text-slate-100/80 hover:text-white"
+              >
+                Features
+              </a>
             </li>
             <li>
-              <a href="#how-it-works">How it works</a>
+              <a
+                href="#how-it-works"
+                className="text-slate-100/80 hover:text-white"
+              >
+                How it works
+              </a>
             </li>
             <li>
-              <a href="#pricing">Pricing</a>
+              <a
+                href="#pricing"
+                className="text-slate-100/80 hover:text-white"
+              >
+                Pricing
+              </a>
             </li>
             <li>
-              <a href="#faq">FAQ</a>
+              <a
+                href="#faq"
+                className="text-slate-100/80 hover:text-white"
+              >
+                FAQ
+              </a>
             </li>
           </ul>
         </div>
 
-        {/* Brand */}
-        <a
-          href="/"
-          className="flex items-center gap-2 text-sm font-semibold tracking-tight"
-        >
-          <div className="flex h-10 w-15 items-center justify-center">
-            <img src={logo} alt="ChefLaa logo" className=" object-contain" />
-          </div>
-          <div className="flex flex-col leading-tight">
-            <span className="text-sm sm:text-base">ChefLaa</span>
-            <span className="text-[11px] text-base-content/70 sm:text-xs">
-              AI-native kitchen copilot
-            </span>
-          </div>
-        </a>
+        {/* RIGHT: theme toggle + auth + CTA */}
+        <div className="navbar-end gap-2">
+          {/* Theme toggle */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle dark and light mode"
+            className="btn btn-ghost btn-circle text-slate-100"
+          >
+            <SunIcon
+              className={`h-5 w-5 transition-opacity ${
+                theme === "light" ? "opacity-100" : "opacity-0"
+              }`}
+            />
+            <MoonIcon
+              className={`absolute h-5 w-5 transition-opacity ${
+                theme === "dark" ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          </button>
+
+          <button className="btn btn-ghost btn-sm hidden md:inline-flex text-slate-100/85">
+            Log in
+          </button>
+
+          <button className="btn btn-sm rounded-full border-none bg-[#FF7043] text-[#2D3436] hover:bg-[#ff865f] shadow-md shadow-[#FF7043]/60">
+            Get early access
+          </button>
+        </div>
       </div>
-
-      {/* CENTER: Desktop links */}
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal gap-4 px-1 text-sm font-medium">
-          <li>
-            <a href="#features" className="text-slate-100/80 hover:text-white">
-              Features
-            </a>
-          </li>
-          <li>
-            <a
-              href="#how-it-works"
-              className="text-slate-100/80 hover:text-white"
-            >
-              How it works
-            </a>
-          </li>
-          <li>
-            <a href="#pricing" className="text-slate-100/80 hover:text-white">
-              Pricing
-            </a>
-          </li>
-          <li>
-            <a href="#faq" className="text-slate-100/80 hover:text-white">
-              FAQ
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      {/* RIGHT: theme toggle + auth + CTA */}
-      <div className="navbar-end gap-2">
-        {/* Theme toggle */}
-        <button
-          type="button"
-          onClick={toggleTheme}
-          aria-label="Toggle dark and light mode"
-          className="btn btn-ghost btn-circle text-slate-100"
-        >
-          <SunIcon
-            className={`h-5 w-5 transition-opacity ${
-              theme === "light" ? "opacity-100" : "opacity-0"
-            }`}
-          />
-          <MoonIcon
-            className={`absolute h-5 w-5 transition-opacity ${
-              theme === "dark" ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        </button>
-
-        <button className="btn btn-ghost btn-sm hidden md:inline-flex text-slate-100/85">
-          Log in
-        </button>
-
-        <button className="btn btn-sm rounded-full border-none bg-[#FF7043] text-[#2D3436] hover:bg-[#ff865f] shadow-md shadow-[#FF7043]/60">
-          Get early access
-        </button>
-      </div>
-    </div>
+    </header>
   );
 };
 
