@@ -31,8 +31,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-[#1B4332] text-slate-50">
-      {/* Background slider */}
+<section className="relative overflow-x-hidden overflow-y-visible bg-[#1B4332] text-slate-50">      {/* Background slider */}
       <div className="absolute inset-0 z-0">
         {BG_IMAGES.map((src, index) => (
           <div
@@ -90,7 +89,7 @@ const Hero = () => {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 pt-2 text-2xl text-slate-200/90 sm:text-xs">
+          <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-200/90 sm:text-xs">
             <span className="inline-flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-[#D8F3DC]" />
               No credit card or sign‑up required
@@ -176,7 +175,6 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* আগে -right-2 ছিল, এখন ভেতরে আনা হয়েছে */}
             <div className="absolute right-0 -top-3 lg:-top-12 w-40 rounded-2xl border border-white/18 bg-black/80 p-3 text-[11px] text-slate-100 shadow-xl shadow-black/80 backdrop-blur sm:right-2">
               <p className="mb-1 text-[11px] text-slate-300">Smart vision</p>
               <p className="text-sm font-semibold">30+ ingredients</p>
