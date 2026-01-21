@@ -1,5 +1,3 @@
-
-
 @import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
@@ -12,23 +10,30 @@
 @plugin "daisyui/theme" {
   name: "light";
 
+  /* Warm, creamy light background + dark text */
+  --color-base-100: #fff7ed;  /* warm cream */
+  --color-neutral: #111827;   /* nearly-black text */
+
   --color-primary: #1B4332;   /* Forest Green */
   --color-secondary: #D8F3DC; /* Fresh Mint */
   --color-accent: #FF7043;    /* Sunset Orange */
-  --color-neutral: #2D3436;   /* Dark Grey Text */
-  --color-base-100: #ffffff;
 }
 
 /* Custom DARK theme aligned to your palette */
 @plugin "daisyui/theme" {
   name: "dark";
 
+  /* Deep navy/ink background + light text */
+  --color-base-100: #020617;  /* very dark slate */
+  --color-neutral: #e5e7eb;   /* light grey text */
+
   --color-primary: #D8F3DC;
   --color-secondary: #1B4332;
   --color-accent: #FF7043;
-  --color-neutral: #E5E7EB;
-  --color-base-100: #020617;
 }
+
+/* Tailwind dark: variant – works with .dark class or [data-theme="dark"] */
+@custom-variant dark (&:is(.dark &,[data-theme="dark"] &));
 
 :root {
   font-family: "Urbanist", system-ui, -apple-system, BlinkMacSystemFont,
@@ -37,8 +42,23 @@
   font-style: normal;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   margin: 0;
+  background-color: var(--color-base-100);
+  color: var(--color-neutral);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Extra safety for dark theme */
+html[data-theme="dark"] body {
+  background-color: #020617;
+  color: #E5E7EB;
 }
 
 /* Brand palette (for reference only)
@@ -50,4 +70,33 @@ body {
 
 * {
   scroll-behavior: smooth;
+}
+
+/* orbit container – ধীরে ঘুরবে */
+.profileCard_container {
+  animation: orbit-rotate 40s linear infinite;
+}
+
+/* ভেতরের প্রতিটি বাটন উল্টো দিকে rotate হবে যেন icon সোজা থাকে */
+.profile_item {
+  animation: orbit-counter-rotate 40s linear infinite;
+  transform-origin: center;
+}
+
+.profile_item span {
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.45);
+}
+
+/* outer circle rotate */
+@keyframes orbit-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* inner items counter-rotate */
+@keyframes orbit-counter-rotate {
+  to {
+    transform: rotate(-360deg);
+  }
 }

@@ -1,32 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import logo from "../assets/Logo.png";
-
-const getInitialTheme = () => {
-  if (typeof window === "undefined") return "dark";
-  const stored = window.localStorage.getItem("theme");
-  if (stored === "light" || stored === "dark") return stored;
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  return prefersDark ? "dark" : "light";
-};
+import { useTheme } from "../context/ThemeContext";
 
 const Navbar = () => {
-  const [theme, setTheme] = useState(getInitialTheme);
-
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    const root = document.documentElement;
-    root.setAttribute("data-theme", theme);
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-    window.localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  };
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-[60] flex justify-center px-4 pt-3">

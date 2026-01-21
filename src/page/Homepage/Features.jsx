@@ -5,23 +5,47 @@ const Features = () => {
   const features = [
     {
       title: "Smart ingredient scanner",
-      desc: "AI sees what’s in your fridge from a single image and auto‑builds an ingredient list with quantities.",
       tag: "Vision AI",
+      icon: "📸",
+      bullets: [
+        "Detect 30+ ingredients from a single photo",
+        "Handles real‑world, messy fridge photos",
+        "Auto‑builds ingredient list with quantities",
+        "Works with any camera or image upload",
+      ],
     },
     {
-      title: "Personalized recipes",
-      desc: "Tell us if you’re vegan, keto or have allergies; every suggested recipe respects your preferences.",
-      tag: "Diet-aware",
+      title: "Diet & allergy aware",
+      tag: "Personalization",
+      icon: "🧬",
+      bullets: [
+        "Store vegan, keto, halal & custom diets",
+        "Block recipes containing your allergens",
+        "Suggest smart ingredient swaps",
+        "Keep preferences synced across devices",
+      ],
     },
     {
       title: "Guided cook mode",
-      desc: "Hands‑free, step‑by‑step instructions with optional voice read‑out while you cook.",
       tag: "Cookflow",
+      icon: "🎧",
+      bullets: [
+        "Step‑by‑step, voice‑friendly instructions",
+        "Hands‑free flow while you cook",
+        "Auto‑adjusts steps for servings",
+        "Keeps all active timers in one place",
+      ],
     },
     {
-      title: "Instant nutrition & macros",
-      desc: "Precise calories, macros and portions per serving, including swaps to hit your targets.",
+      title: "Instant macros & planning",
       tag: "Nutrition engine",
+      icon: "📊",
+      bullets: [
+        "Full calories & macros per plate",
+        "Clear protein / carb / fat breakdown",
+        "Plan your week by nutrition goals",
+        "Export a ready‑to‑shop grocery list",
+      ],
     },
   ];
 
@@ -30,64 +54,96 @@ const Features = () => {
       id="features"
       className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24"
     >
-      <div className="grid gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center">
-        {/* Left copy */}
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200">
-            Features
-          </p>
-          <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
-            Everything you need to plan, cook and track in one place.
-          </h2>
-          <p className="mt-3 text-sm text-slate-300 max-w-xl">
-            SmartChef AI combines ingredient detection, recipe planning and
-            nutrition analytics so you can move from “What can I cook?” to
-            “What should I cook for my goals?” in seconds.
-          </p>
+      <div className="mb-8 text-center">
+        <p className="text-xs md:text-4xl font-semibold uppercase tracking-[0.2em] text-emerald-400">
+          Features
+        </p>
+        <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
+          More than a recipe app. It&apos;s a kitchen operating system.
+        </h2>
+        <p className="mt-3 max-w-2xl mx-auto text-sm light:text-slate-300">
+          SmartChef AI connects what you have, what you like and what your body
+          needs — into one simple, visual workflow.
+        </p>
+      </div>
 
-          <ul className="mt-6 space-y-3 text-sm text-slate-200">
-            <li className="flex items-start gap-2">
-              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#FF7043]" />
-              <span>
-                Works from messy, real‑world fridge photos – not studio shots.
-              </span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#D8F3DC]" />
-              <span>
-                Under 10 seconds from upload to ready‑to‑use recipes.
-              </span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-sky-400" />
-              <span>
-                Optimized for mobile so you can plan while standing at the
-                fridge.
-              </span>
-            </li>
-          </ul>
-        </div>
-
-        {/* Right feature cards */}
-        <div className="grid gap-4 sm:grid-cols-2">
-          {features.map((f) => (
-            <div
-              key={f.title}
-              className="group relative overflow-hidden rounded-2xl border border-emerald-400/15 bg-slate-900/80 p-4 shadow-lg shadow-black/50 backdrop-blur"
-            >
-              <span className="inline-flex rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-200">
-                {f.tag}
-              </span>
-              <h3 className="mt-2 text-sm font-semibold text-slate-50 group-hover:text-emerald-100">
-                {f.title}
-              </h3>
-              <p className="mt-1.5 text-[13px] text-slate-300">{f.desc}</p>
-            </div>
-          ))}
-        </div>
+      {/* Animated feature cards */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {features.map((f) => (
+          <FeatureCard key={f.title} feature={f} />
+        ))}
       </div>
     </section>
   );
 };
+
+const FeatureCard = ({ feature }) => {
+  return (
+    <div className="relative mx-auto flex w-full max-w-[320px] flex-col items-center justify-center gap-4 rounded-2xl border border-emerald-500/25 bg-slate-900/80 py-8 px-6 shadow-xl shadow-black/60 transition-all duration-300 group">
+      {/* Title */}
+      <div className="z-10 text-center uppercase leading-none">
+        <p
+          className="-mb-2 text-lg font-bold tracking-wider text-gray-400/60"
+          style={{
+            WebkitTextStroke: "1px rgba(148,163,184,0.6)",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          {feature.tag}
+        </p>
+        <p className="z-30 text-xl font-bold tracking-wider text-[#D8F3DC]">
+          {feature.title}
+        </p>
+      </div>
+
+      {/* Icon + tooltip panel */}
+      <div className="relative z-20 mt-2 flex w-[190px] flex-col items-center">
+        {/* কেন্দ্রের গোল অংশ */}
+        <div className="flex h-[120px] w-[120px] items-center justify-center rounded-full bg-gradient-to-br from-[#1B4332] via-slate-950 to-[#FF7043] p-1 shadow-[0_15px_40px_rgba(0,0,0,0.8)]">
+          <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-950">
+            <span className="text-4xl">{feature.icon}</span>
+          </div>
+        </div>
+
+        {/* Tooltip panel – কার্ডের ভেতরে, নিচে স্লাইড + fade */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-10 opacity-0 transition-all duration-400 group-hover:translate-y-20 group-hover:opacity-100">
+          <div className="rounded-2xl bg-white/95 p-3 text-left shadow-lg shadow-slate-900/80">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#1B4332]">
+              Details
+            </p>
+            <ul className="flex flex-col items-start gap-1.5">
+              {feature.bullets.map((item, idx) => (
+                <li
+                  key={item}
+                  className="inline-flex items-center gap-2 text-[11px] font-semibold text-slate-800 opacity-0 transition-all duration-400 group-hover:opacity-100"
+                  style={{ transitionDelay: `${(idx + 1) * 120}ms` }}
+                >
+                  <CheckIcon />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CheckIcon = () => (
+  <svg
+    strokeLinejoin="round"
+    strokeLinecap="round"
+    strokeWidth={3}
+    className="h-3 w-3 stroke-[#1B4332]"
+    stroke="currentColor"
+    fill="none"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+    <polyline points="22 4 12 14.01 9 11.01" />
+  </svg>
+);
 
 export default Features;

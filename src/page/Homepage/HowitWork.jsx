@@ -38,15 +38,16 @@ const HowItWorks = () => {
       />
 
       <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        
         {/* Left text */}
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200">
+          <p className="text-xs md:text-4xl text-center font-semibold uppercase tracking-[0.2em] text-emerald-400">
             Workflow
           </p>
           <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
             From “What do I cook?” to a plated meal — in under a minute.
           </h2>
-          <p className="mt-3 max-w-xl text-sm text-slate-300">
+          <p className="mt-3 max-w-xl text-sm light:text-slate-300">
             SmartChef AI turns whatever you have on hand into a concrete plan.
             Scan your fridge, review the ingredients, and start cooking with
             chef‑curated recipes and clear macros.
@@ -62,7 +63,7 @@ const HowItWorks = () => {
                   {step.icon}
                 </div>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200/90">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300/90">
                     Step {idx + 1}
                   </p>
                   <h3 className="text-sm font-semibold text-slate-50">

@@ -32,8 +32,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative overflow-x-hidden overflow-y-visible bg-[#1B4332] text-slate-50">
-      {/* Background slider */}
+<section className="relative overflow-x-hidden overflow-y-visible bg-[#1B4332] text-slate-50 dark:bg-slate-950">      {/* Background slider */}
       <div className="absolute inset-0 z-0">
         {BG_IMAGES.map((src, index) => (
           <div

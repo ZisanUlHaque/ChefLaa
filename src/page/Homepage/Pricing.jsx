@@ -8,15 +8,15 @@ const Pricing = () => {
       className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24"
     >
       <div className="mb-10 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200">
+        <p className="text-xs md:text-4xl font-semibold uppercase tracking-[0.2em] text-emerald-400">
           Pricing
         </p>
         <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
-          Start free. Upgrade when your kitchen routine demands more.
+          Start free. Upgrade when SmartChef becomes part of your routine.
         </h2>
-        <p className="mt-3 text-sm text-slate-300 max-w-2xl mx-auto">
-          No credit card required to get started. Scan, test and cook with AI
-          before you commit.
+        <p className="mt-3 text-sm light:text-slate-300 max-w-2xl mx-auto">
+          Test fridge scans, recipes and macros as much as you like on the free
+          tier. Move to Pro only when you’re ready to plan every week with AI.
         </p>
       </div>
 
@@ -52,7 +52,7 @@ const Pricing = () => {
         <PricingCard
           name="Family"
           price="$19/mo"
-          subtitle="Plan for everyone at home."
+          subtitle="Plan meals for everyone at home."
           highlight={false}
           features={[
             "Up to 4 family profiles",
@@ -70,8 +70,8 @@ const PricingCard = ({ name, price, subtitle, features, highlight, badge }) => (
   <div
     className={`relative flex h-full flex-col rounded-2xl border bg-slate-900/80 p-5 shadow-xl backdrop-blur ${
       highlight
-        ? "border-[#FF7043]/70 shadow-[#FF7043]/40"
-        : "border-emerald-500/20 shadow-black/50"
+        ? "border-[#FF7043]/80 shadow-[#FF7043]/45"
+        : "border-emerald-500/25 shadow-black/60"
     }`}
   >
     {badge && (

@@ -34,13 +34,13 @@ const ScanShowcase = () => {
     <section className="relative mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:pb-24">
       <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200">
+          <p className="text-xs md:text-4xl font-semibold uppercase tracking-[0.2em] text-emerald-400">
             Live examples
           </p>
           <h2 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
             What SmartChef can do with a single scan.
           </h2>
-          <p className="mt-2 max-w-xl text-sm text-slate-300">
+          <p className="mt-2 max-w-xl text-sm light:text-slate-300">
             Real‑world fridge photos, not studio setups. Swipe through to see
             how random items become structured meal plans.
           </p>
