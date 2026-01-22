@@ -92,7 +92,7 @@ const HowItWorks = () => {
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <div className="relative overflow-hidden rounded-2xl border border-white/10">
                 <img
-                  src="https://images.unsplash.com/photo-1604908176997-1251884b08a7?auto=format&fit=crop&w=800&q=80"
+                  src="https://i.ibb.co/WvKmnHr3/pexels-cottonbro-6969266.jpg"
                   alt="Fridge ingredients"
                   className="h-40 w-full object-cover"
                 />

@@ -5,20 +5,24 @@ import Features from "./Features";
 import Pricing from "./Pricing";
 import FAQ from "./FAQ";
 import ScanShowcase from "./ScanShowcase";
-import TechStackSection from "./TechStackSection";
 import WhyChooseSection from "./WhyChooseSection";
+import MarqueeSection from "./MarqueeSection";
+import IngredientsCompareSection from "./IngredientsCompareSection";
+import MissionSection from "./MissionSection";
 
 const Home = () => {
   return (
     <div className="">
       <Hero></Hero>
-<main className="bg-transparent text-inherit">
+      <main className="bg-transparent text-inherit">
         <HowItWorks />
         <ScanShowcase /> {/* Swiper slider section */}
         <Features />
         <Pricing />
-        <TechStackSection></TechStackSection>
+        <IngredientsCompareSection></IngredientsCompareSection>
+        <MarqueeSection></MarqueeSection>
         <FAQ />
+        <MissionSection></MissionSection>
         <WhyChooseSection></WhyChooseSection>
       </main>
     </div>

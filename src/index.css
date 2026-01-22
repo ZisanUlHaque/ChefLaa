@@ -72,31 +72,7 @@ html[data-theme="dark"] body {
   scroll-behavior: smooth;
 }
 
-/* orbit container – ধীরে ঘুরবে */
-.profileCard_container {
-  animation: orbit-rotate 40s linear infinite;
-}
 
-/* ভেতরের প্রতিটি বাটন উল্টো দিকে rotate হবে যেন icon সোজা থাকে */
-.profile_item {
-  animation: orbit-counter-rotate 40s linear infinite;
-  transform-origin: center;
-}
 
-.profile_item span {
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.45);
-}
-
-/* outer circle rotate */
-@keyframes orbit-rotate {
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 /* inner items counter-rotate */
-@keyframes orbit-counter-rotate {
-  to {
-    transform: rotate(-360deg);
-  }
-}
