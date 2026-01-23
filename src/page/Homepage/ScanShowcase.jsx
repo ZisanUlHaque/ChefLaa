@@ -92,7 +92,7 @@ const ScanShowcase = () => {
           1024: { slidesPerView: 3 },
         }}
         coverflowEffect={{
-          rotate: 18,        // কম rotate → কম jerk
+          rotate: 18,        
           stretch: 0,
           depth: 130,        // depth কমালে motion নরম হয়
           modifier: 1,
