@@ -9,6 +9,7 @@ import WhyChooseSection from "./WhyChooseSection";
 import MarqueeSection from "./MarqueeSection";
 import IngredientsCompareSection from "./IngredientsCompareSection";
 import MissionSection from "./MissionSection";
+import WhyChooseUs from "./WhyChooseUs";
 
 const Home = () => {
   return (
@@ -23,6 +24,7 @@ const Home = () => {
         <MarqueeSection></MarqueeSection>
         <FAQ />
         <MissionSection></MissionSection>
+        <WhyChooseUs></WhyChooseUs>
         <WhyChooseSection></WhyChooseSection>
       </main>
     </div>
