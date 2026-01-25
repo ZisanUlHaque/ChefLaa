@@ -1,4 +1,3 @@
-// src/page/Homepage/WhyChooseUs.jsx
 import React from "react";
 
 const reasons = [
