@@ -81,7 +81,7 @@ const WhyChooseUs = () => {
               </div>
             </div>
 
-            {/* number + title */}
+        
             <p className="text-sm font-semibold">
               <span className="mr-1 text-emerald-500">{item.id}</span>
               <span>{item.title}</span>
