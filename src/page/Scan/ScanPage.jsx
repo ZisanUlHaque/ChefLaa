@@ -1,17 +1,22 @@
-import React, { useRef, useState, useEffect } from "react";
+// src/page/Scan/ScanPage.jsx
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 
 const ScanPage = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [dragActive, setDragActive] = useState(false);
   const [scanned, setScanned] = useState(false);
   const fileInputRef = useRef(null);
+  const navigate = useNavigate();
 
-  // object URL cleanup
+  // cleanup object URL
   useEffect(() => {
     return () => {
       if (imageUrl) URL.revokeObjectURL(imageUrl);
     };
   }, [imageUrl]);
+
+  const clamp = (val) => Math.min(100, Math.max(0, val));
 
   const handleFiles = (files) => {
     const file = files?.[0];
@@ -54,8 +59,11 @@ const ScanPage = () => {
 
   const handleScan = () => {
     if (!imageUrl) return;
-    // পরে এখানে AI API কল করবে
     setScanned(true);
+  };
+
+  const goToRecipe = () => {
+    navigate("/recipe/creamy-garlic-veggie-pasta");
   };
 
   return (
@@ -67,7 +75,8 @@ const ScanPage = () => {
             Scan & Cook
           </p>
           <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
-            Snap your fridge,{" "}
+            Snap your fridge,
+            <br />
             <span className="bg-gradient-to-r from-[#FF7043] to-[#FFD1A3] bg-clip-text text-transparent">
               let SmartChef plan dinner.
             </span>
@@ -85,7 +94,9 @@ const ScanPage = () => {
             </li>
             <li className="flex items-start gap-2">
               <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-300" />
-              <span>Macronutrients, calories and servings computed for you.</span>
+              <span>
+                Macros, calories and servings are auto‑calculated per recipe.
+              </span>
             </li>
             <li className="flex items-start gap-2">
               <span className="mt-1 h-1.5 w-1.5 rounded-full bg-sky-400" />
@@ -101,8 +112,9 @@ const ScanPage = () => {
           )}
         </div>
 
-        {/* RIGHT: upload card */}
+        {/* RIGHT: upload + results */}
         <div className="space-y-4">
+          {/* Upload card */}
           <div
             className={`
               relative flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed
@@ -153,6 +165,7 @@ const ScanPage = () => {
             />
           </div>
 
+          {/* Buttons */}
           <div className="flex flex-wrap items-center gap-3">
             <button
               type="button"
@@ -164,7 +177,7 @@ const ScanPage = () => {
                 ${
                   imageUrl
                     ? "bg-[#FF7043] text-slate-900 hover:bg-[#ff865f]"
-                    : "bg-slate-700 text-slate-400 cursor-not-allowed"
+                    : "cursor-not-allowed bg-slate-700 text-slate-400"
                 }
               `}
             >
@@ -182,24 +195,31 @@ const ScanPage = () => {
           {/* Results (dummy for now) */}
           {scanned && (
             <div className="mt-4 space-y-4 rounded-2xl border border-slate-700/70 bg-slate-950/90 p-4 text-xs text-slate-100">
+              {/* Ingredients */}
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
                   Detected ingredients
                 </p>
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  {["Tomato", "Spinach", "Chicken", "Pasta", "Garlic", "Parmesan"].map(
-                    (ing) => (
-                      <span
-                        key={ing}
-                        className="rounded-full bg-slate-900/80 px-2 py-1 text-[11px]"
-                      >
-                        {ing}
-                      </span>
-                    )
-                  )}
+                  {[
+                    "Tomato",
+                    "Spinach",
+                    "Chicken",
+                    "Pasta",
+                    "Garlic",
+                    "Parmesan",
+                  ].map((ing) => (
+                    <span
+                      key={ing}
+                      className="rounded-full bg-slate-900/80 px-2 py-1 text-[11px]"
+                    >
+                      {ing}
+                    </span>
+                  ))}
                 </div>
               </div>
 
+              {/* Suggested recipe */}
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
                   Suggested recipe
@@ -213,9 +233,19 @@ const ScanPage = () => {
                   </p>
                   <ul className="mt-2 space-y-1 text-slate-400">
                     <li>• Step‑by‑step cook mode with timers.</li>
-                    <li>• Macros per serving: 32g protein / 48g carbs / 14g fats.</li>
+                    <li>
+                      • Macros per serving: 32g protein / 48g carbs / 14g fats.
+                    </li>
                     <li>• Auto‑generated grocery checklist if anything is missing.</li>
                   </ul>
+
+                  <button
+                    type="button"
+                    onClick={goToRecipe}
+                    className="mt-3 rounded-full bg-[#FF7043] px-3 py-1.5 text-[11px] font-semibold text-slate-900 hover:bg-[#ff865f]"
+                  >
+                    View full recipe
+                  </button>
                 </div>
               </div>
             </div>
