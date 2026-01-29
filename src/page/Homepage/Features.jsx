@@ -67,7 +67,6 @@ const Features = () => {
         </p>
       </div>
 
-      {/* Animated feature cards */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {features.map((f) => (
           <FeatureCard key={f.title} feature={f} />
