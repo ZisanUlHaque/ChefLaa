@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../assets/Logo.png";
 import { useTheme } from "../context/ThemeContext";
 
 const Navbar = () => {
@@ -77,15 +76,15 @@ const Navbar = () => {
           >
             <div className="flex h-10 items-center justify-center">
               <img
-                src={logo}
+                src="https://img.icons8.com/?size=96&id=TPyMDKVYbCQo&format=png"
                 alt="ChefLaa logo"
                 className="h-9 w-auto object-contain"
               />
             </div>
             <div className="flex flex-col leading-tight">
-              <span className="text-sm sm:text-base text-slate-100">
-                ChefLaa
-              </span>
+              <h2 className="text-sm font-bold text-black">
+                Chef<span className="text-primary">laa</span>
+              </h2>
               <span className="text-[11px] text-slate-200/80 sm:text-xs">
                 AI-native kitchen copilot
               </span>
@@ -113,18 +112,12 @@ const Navbar = () => {
               </a>
             </li>
             <li>
-              <a
-                href="#pricing"
-                className="text-slate-100/80 hover:text-white"
-              >
+              <a href="#pricing" className="text-slate-100/80 hover:text-white">
                 Pricing
               </a>
             </li>
             <li>
-              <a
-                href="#faq"
-                className="text-slate-100/80 hover:text-white"
-              >
+              <a href="#faq" className="text-slate-100/80 hover:text-white">
                 FAQ
               </a>
             </li>

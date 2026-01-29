@@ -10,7 +10,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2">
               <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-[#FF7043] to-[#FFD1A3] text-sm font-bold text-slate-900 shadow-lg shadow-[#FF7043]/40">
-                CL
+                <img src="https://img.icons8.com/?size=96&id=TPyMDKVYbCQo&format=png" alt="" />
               </div>
               <div className="flex flex-col leading-tight">
                 <span className="text-sm font-semibold">ChefLaa</span>
