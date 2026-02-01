@@ -1,4 +1,3 @@
-// src/page/Scan/ScanPage.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -6,27 +5,33 @@ const ScanPage = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [dragActive, setDragActive] = useState(false);
   const [scanned, setScanned] = useState(false);
+  const [scanResult, setScanResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const fileInputRef = useRef(null);
+  const fileRef = useRef(null);
   const navigate = useNavigate();
 
-  // cleanup object URL
   useEffect(() => {
     return () => {
       if (imageUrl) URL.revokeObjectURL(imageUrl);
     };
   }, [imageUrl]);
 
-  const clamp = (val) => Math.min(100, Math.max(0, val));
-
   const handleFiles = (files) => {
     const file = files?.[0];
     if (file && file.type.startsWith("image/")) {
+      fileRef.current = file;
       const url = URL.createObjectURL(file);
       setImageUrl((prev) => {
         if (prev) URL.revokeObjectURL(prev);
         return url;
       });
       setScanned(false);
+      setScanResult(null);
+      setError("");
+    } else {
+      setError("Please upload a valid image file.");
     }
   };
 
@@ -57,13 +62,48 @@ const ScanPage = () => {
     handleFiles(e.target.files);
   };
 
-  const handleScan = () => {
-    if (!imageUrl) return;
-    setScanned(true);
+  const handleScan = async () => {
+    if (loading) return;
+    if (!fileRef.current) {
+      setError("Please upload an image first.");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+    setScanned(false);
+    setScanResult(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("image", fileRef.current);
+
+      const response = await fetch("http://localhost:5000/api/scan", {
+        method: "POST",
+        body: formData
+      });
+
+      // JSON শুধু একবার read করব
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok || !data) {
+        throw new Error(data?.error || "Scan failed on server");
+      }
+
+      setScanResult(data);
+      setScanned(true);
+    } catch (err) {
+      console.error("Frontend scan error:", err);
+      setError(err.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const goToRecipe = () => {
-    navigate("/recipe/creamy-garlic-veggie-pasta");
+    const firstRecipe = scanResult?.recipes?.[0];
+    if (!firstRecipe) return;
+    navigate(`/recipe/${firstRecipe.slug}`);
   };
 
   return (
@@ -83,8 +123,8 @@ const ScanPage = () => {
           </h1>
           <p className="max-w-xl text-sm text-slate-600 dark:text-slate-300 sm:text-base">
             Upload a fridge, shelf or cutting‑board photo. SmartChef will detect
-            what&apos;s inside and turn it into recipes, macros and a ready‑to‑shop
-            list.
+            what&apos;s inside and turn it into recipes, macros and a
+            ready‑to‑shop list.
           </p>
 
           <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-200">
@@ -156,6 +196,15 @@ const ScanPage = () => {
               </div>
             )}
 
+            {loading && (
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/60">
+                <div className="h-8 w-8 animate-spin rounded-full border-2 border-emerald-300 border-t-transparent" />
+                <p className="mt-2 text-xs text-slate-100">
+                  Scanning image with AI…
+                </p>
+              </div>
+            )}
+
             <input
               ref={fileInputRef}
               type="file"
@@ -169,19 +218,26 @@ const ScanPage = () => {
           <div className="flex flex-wrap items-center gap-3">
             <button
               type="button"
-              disabled={!imageUrl}
+              disabled={!fileRef.current || loading}
               onClick={handleScan}
               className={`
                 inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold
                 transition shadow-md
                 ${
-                  imageUrl
+                  fileRef.current && !loading
                     ? "bg-[#FF7043] text-slate-900 hover:bg-[#ff865f]"
                     : "cursor-not-allowed bg-slate-700 text-slate-400"
                 }
               `}
             >
-              Scan with AI
+              {loading ? (
+                <>
+                  <span className="mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-slate-900 border-t-transparent" />
+                  Scanning...
+                </>
+              ) : (
+                "Scan with AI"
+              )}
             </button>
 
             <button
@@ -192,23 +248,17 @@ const ScanPage = () => {
             </button>
           </div>
 
-          {/* Results (dummy for now) */}
-          {scanned && (
+          {error && <p className="text-xs text-red-400">{error}</p>}
+
+          {/* Results */}
+          {scanned && scanResult && (
             <div className="mt-4 space-y-4 rounded-2xl border border-slate-700/70 bg-slate-950/90 p-4 text-xs text-slate-100">
-              {/* Ingredients */}
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
                   Detected ingredients
                 </p>
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  {[
-                    "Tomato",
-                    "Spinach",
-                    "Chicken",
-                    "Pasta",
-                    "Garlic",
-                    "Parmesan",
-                  ].map((ing) => (
+                  {scanResult.ingredients?.map((ing) => (
                     <span
                       key={ing}
                       className="rounded-full bg-slate-900/80 px-2 py-1 text-[11px]"
@@ -219,35 +269,34 @@ const ScanPage = () => {
                 </div>
               </div>
 
-              {/* Suggested recipe */}
-              <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
-                  Suggested recipe
-                </p>
-                <div className="mt-2 rounded-xl border border-slate-700 bg-slate-900/85 p-3 text-[11px]">
-                  <p className="text-sm font-semibold text-slate-50">
-                    Creamy Garlic Veggie Pasta
+              {/* Suggested recipe (first) */}
+              {scanResult.recipes?.[0] && (
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
+                    Suggested recipe
                   </p>
-                  <p className="mt-1 text-slate-300">
-                    18 min · 440 kcal · high‑protein balanced plate.
-                  </p>
-                  <ul className="mt-2 space-y-1 text-slate-400">
-                    <li>• Step‑by‑step cook mode with timers.</li>
-                    <li>
-                      • Macros per serving: 32g protein / 48g carbs / 14g fats.
-                    </li>
-                    <li>• Auto‑generated grocery checklist if anything is missing.</li>
-                  </ul>
+                  <div className="mt-2 rounded-xl border border-slate-700 bg-slate-900/85 p-3 text-[11px]">
+                    <p className="text-sm font-semibold text-slate-50">
+                      {scanResult.recipes[0].title}
+                    </p>
+                    <p className="mt-1 text-slate-300">
+                      {scanResult.recipes[0].short}
+                    </p>
+                    <p className="mt-1 text-slate-400">
+                      {scanResult.recipes[0].time} ·{" "}
+                      {scanResult.recipes[0].kcal} kcal
+                    </p>
 
-                  <button
-                    type="button"
-                    onClick={goToRecipe}
-                    className="mt-3 rounded-full bg-[#FF7043] px-3 py-1.5 text-[11px] font-semibold text-slate-900 hover:bg-[#ff865f]"
-                  >
-                    View full recipe
-                  </button>
+                    <button
+                      type="button"
+                      onClick={goToRecipe}
+                      className="mt-3 rounded-full bg-[#FF7043] px-3 py-1.5 text-[11px] font-semibold text-slate-900 hover:bg-[#ff865f]"
+                    >
+                      View full recipe
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
         </div>

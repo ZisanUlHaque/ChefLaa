@@ -82,8 +82,8 @@ const Navbar = () => {
               />
             </div>
             <div className="flex flex-col leading-tight">
-              <h2 className="text-sm font-bold text-black">
-                Chef<span className="text-primary">laa</span>
+              <h2 className="text-sm font-bold text-lime-300">
+                Chef<span className="text-emerald-400">laa</span>
               </h2>
               <span className="text-[11px] text-slate-200/80 sm:text-xs">
                 AI-native kitchen copilot
