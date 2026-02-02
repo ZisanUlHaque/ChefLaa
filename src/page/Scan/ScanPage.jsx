@@ -250,7 +250,6 @@ const ScanPage = () => {
 
           {error && <p className="text-xs text-red-400">{error}</p>}
 
-          {/* Results */}
           {scanned && scanResult && (
             <div className="mt-4 space-y-4 rounded-2xl border border-slate-700/70 bg-slate-950/90 p-4 text-xs text-slate-100">
               <div>
