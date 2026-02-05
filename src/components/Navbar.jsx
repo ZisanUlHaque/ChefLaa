@@ -1,8 +1,20 @@
-import React from "react";
+// src/components/Navbar.jsx
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { useTheme } from "../context/ThemeContext";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    setShowUserMenu(false);
+    navigate("/");
+  };
 
   return (
     <header className="sticky top-0 z-[60] flex justify-center px-4 pt-3">
@@ -50,28 +62,38 @@ const Navbar = () => {
               className="
                 menu menu-sm dropdown-content
                 mt-3 w-52 rounded-2xl border border-white/15
-                bg-base-100/90 shadow-xl backdrop-blur-xl
+                bg-slate-900/95 shadow-xl backdrop-blur-xl
                 z-[80] p-2
               "
             >
               <li>
-                <a href="#features">Features</a>
+                <Link to="/#features" className="text-slate-100">Features</Link>
               </li>
               <li>
-                <a href="#how-it-works">How it works</a>
+                <Link to="/#how-it-works" className="text-slate-100">How it works</Link>
               </li>
               <li>
-                <a href="#pricing">Pricing</a>
+                <Link to="/scan" className="text-slate-100">Scan Food</Link>
               </li>
               <li>
-                <a href="#faq">FAQ</a>
+                <Link to="/#pricing" className="text-slate-100">Pricing</Link>
               </li>
+              {!isAuthenticated && (
+                <>
+                  <li className="mt-2 border-t border-white/10 pt-2">
+                    <Link to="/login" className="text-slate-100">Log in</Link>
+                  </li>
+                  <li>
+                    <Link to="/signup" className="text-emerald-400">Sign up</Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
 
           {/* Brand */}
-          <a
-            href="/"
+          <Link
+            to="/"
             className="flex items-center gap-2 text-sm font-semibold tracking-tight"
           >
             <div className="flex h-10 items-center justify-center">
@@ -89,37 +111,51 @@ const Navbar = () => {
                 AI-native kitchen copilot
               </span>
             </div>
-          </a>
+          </Link>
         </div>
 
         {/* CENTER: Desktop links */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal gap-4 px-1 text-sm font-medium">
             <li>
-              <a
-                href="#features"
+              <Link
+                to="/#features"
                 className="text-slate-100/80 hover:text-white"
               >
                 Features
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#how-it-works"
+              <Link
+                to="/#how-it-works"
                 className="text-slate-100/80 hover:text-white"
               >
                 How it works
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#pricing" className="text-slate-100/80 hover:text-white">
+              <Link 
+                to="/scan" 
+                className="text-slate-100/80 hover:text-white"
+              >
+                Scan
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/#pricing" 
+                className="text-slate-100/80 hover:text-white"
+              >
                 Pricing
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#faq" className="text-slate-100/80 hover:text-white">
+              <Link 
+                to="/#faq" 
+                className="text-slate-100/80 hover:text-white"
+              >
                 FAQ
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -145,13 +181,124 @@ const Navbar = () => {
             />
           </button>
 
-          <button className="btn btn-ghost btn-sm hidden md:inline-flex text-slate-100/85">
-            Log in
-          </button>
+          {isAuthenticated ? (
+            /* Logged in state */
+            <div className="relative">
+              <button
+                onClick={() => setShowUserMenu(!showUserMenu)}
+                className="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 py-1 pl-1 pr-3 transition hover:bg-white/20"
+              >
+                <img
+                  src={user?.avatar || `https://ui-avatars.com/api/?name=${user?.name}&background=random`}
+                  alt={user?.name}
+                  className="h-8 w-8 rounded-full object-cover ring-2 ring-emerald-400/50"
+                />
+                <span className="hidden text-sm font-medium text-slate-100 sm:block">
+                  {user?.name?.split(" ")[0]}
+                </span>
+                <svg
+                  className={`h-4 w-4 text-slate-300 transition-transform ${showUserMenu ? "rotate-180" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
 
-          <button className="btn btn-sm rounded-full border-none bg-[#FF7043] text-[#2D3436] hover:bg-[#ff865f] shadow-md shadow-[#FF7043]/60">
-            Get early access
-          </button>
+              {/* User dropdown menu */}
+              {showUserMenu && (
+                <>
+                  {/* Backdrop */}
+                  <div
+                    className="fixed inset-0 z-[70]"
+                    onClick={() => setShowUserMenu(false)}
+                  />
+                  
+                  {/* Menu */}
+                  <div className="absolute right-0 top-full z-[80] mt-2 w-56 rounded-2xl border border-white/15 bg-slate-900/95 p-2 shadow-xl backdrop-blur-xl">
+                    {/* User info */}
+                    <div className="mb-2 border-b border-white/10 px-3 pb-3 pt-2">
+                      <p className="text-sm font-semibold text-slate-100">{user?.name}</p>
+                      <p className="text-xs text-slate-400">{user?.email}</p>
+                    </div>
+
+                    {/* Menu items */}
+                    <ul className="space-y-1">
+                      <li>
+                        <Link
+                          to="/profile"
+                          onClick={() => setShowUserMenu(false)}
+                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+                        >
+                          <span className="text-lg">👤</span>
+                          My Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/saved-recipes"
+                          onClick={() => setShowUserMenu(false)}
+                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+                        >
+                          <span className="text-lg">💾</span>
+                          Saved Recipes
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/scan-history"
+                          onClick={() => setShowUserMenu(false)}
+                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+                        >
+                          <span className="text-lg">📷</span>
+                          Scan History
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/settings"
+                          onClick={() => setShowUserMenu(false)}
+                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+                        >
+                          <span className="text-lg">⚙️</span>
+                          Settings
+                        </Link>
+                      </li>
+                    </ul>
+
+                    {/* Logout */}
+                    <div className="mt-2 border-t border-white/10 pt-2">
+                      <button
+                        onClick={handleLogout}
+                        className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-red-400 transition hover:bg-red-500/10"
+                      >
+                        <span className="text-lg">🚪</span>
+                        Log out
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          ) : (
+            /* Logged out state */
+            <>
+              <Link
+                to="/login"
+                className="btn btn-ghost btn-sm hidden text-slate-100/85 md:inline-flex"
+              >
+                Log in
+              </Link>
+
+              <Link
+                to="/signup"
+                className="btn btn-sm rounded-full border-none bg-[#FF7043] text-[#2D3436] shadow-md shadow-[#FF7043]/60 hover:bg-[#ff865f]"
+              >
+                Get started
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>
@@ -183,7 +330,7 @@ const MoonIcon = (props) => (
     strokeLinejoin="round"
     {...props}
   >
-    <path d="M21 12.79A8.5 8.5 0 0112.21 3 6.5 6.5 0 1019 15.79 8.46 8.46 0 0121 12.79z" />
+    <path d="M21 12.79A8.5 8.5 0 0112.21 3 6.5 6.5 0 1019 15.79 8.46 8.46 0 0021 12.79z" />
   </svg>
 );
 
