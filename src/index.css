@@ -1,3 +1,4 @@
+/* src/index.css */
 @import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
@@ -9,30 +10,24 @@
 /* Custom LIGHT theme using your brand colors */
 @plugin "daisyui/theme" {
   name: "light";
-
-  /* Warm, creamy light background + dark text */
-  --color-base-100: #fff7ed;  /* warm cream */
-  --color-neutral: #111827;   /* nearly-black text */
-
-  --color-primary: #1B4332;   /* Forest Green */
-  --color-secondary: #D8F3DC; /* Fresh Mint */
-  --color-accent: #FF7043;    /* Sunset Orange */
+  --color-base-100: #fff7ed;
+  --color-neutral: #111827;
+  --color-primary: #1B4332;
+  --color-secondary: #D8F3DC;
+  --color-accent: #FF7043;
 }
 
 /* Custom DARK theme aligned to your palette */
 @plugin "daisyui/theme" {
   name: "dark";
-
-  /* Deep navy/ink background + light text */
-  --color-base-100: #020617;  /* very dark slate */
-  --color-neutral: #e5e7eb;   /* light grey text */
-
+  --color-base-100: #020617;
+  --color-neutral: #e5e7eb;
   --color-primary: #D8F3DC;
   --color-secondary: #1B4332;
   --color-accent: #FF7043;
 }
 
-/* Tailwind dark: variant – works with .dark class or [data-theme="dark"] */
+/* Tailwind dark: variant */
 @custom-variant dark (&:is(.dark &,[data-theme="dark"] &));
 
 :root {
@@ -55,24 +50,273 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Extra safety for dark theme */
 html[data-theme="dark"] body {
   background-color: #020617;
   color: #E5E7EB;
 }
 
-/* Brand palette (for reference only)
-   Primary (Forest Green): #1B4332  - trust & freshness
-   Secondary (Fresh Mint): #D8F3DC  - backgrounds / light elements
-   Accent (Sunset Orange): #FF7043  - buttons & CTAs (boosts appetite)
-   Text (Dark Gray):       #2D3436
-*/
-
 * {
   scroll-behavior: smooth;
 }
 
+/* ============================================
+   CUSTOM ANIMATIONS
+   ============================================ */
 
+/* Scan line animation */
+@keyframes scan-line {
+  0% {
+    top: 0%;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    top: 100%;
+    opacity: 1;
+  }
+}
 
+.animate-scan-line {
+  animation: scan-line 2s ease-in-out infinite;
+}
 
-/* inner items counter-rotate */
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Shimmer effect for loading */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Gradient text animation */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Fade in up */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+/* Scale in */
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease-out forwards;
+}
+
+/* Slide in from right */
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.4s ease-out forwards;
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
+
+/* Webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.8);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.5) rgba(15, 23, 42, 0.5);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Text gradient */
+.text-gradient-primary {
+  background: linear-gradient(135deg, #FF7043 0%, #FFD1A3 50%, #D8F3DC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-emerald {
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effects */
+.glow-orange {
+  box-shadow: 0 0 30px rgba(255, 112, 67, 0.4);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+}
+
+/* Card hover lift */
+.card-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Focus ring */
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.5);
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

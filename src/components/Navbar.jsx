@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useTheme } from "../context/ThemeContext";
@@ -17,18 +16,20 @@ const Navbar = () => {
   };
 
   return (
+    // ✅ সব পেজে sticky থাকবে
     <header className="sticky top-0 z-[60] flex justify-center px-4 pt-3">
       {/* Glass navbar card */}
       <div
         className="
           navbar w-full max-w-7xl
-          rounded-2xl border border-white/15
-          bg-white/10
-          shadow-[0_18px_60px_rgba(15,23,42,0.75)]
+          rounded-2xl border
+          bg-white/90 text-slate-900
+          border-slate-200/80
+          shadow-[0_18px_60px_rgba(15,23,42,0.6)]
           backdrop-blur-xl
           px-4
-          text-slate-100
-          dark:bg-slate-900/70 dark:text-slate-100
+          dark:bg-slate-900/80 dark:text-slate-100
+          dark:border-white/15
           transition-colors duration-300
           overflow-visible
         "
@@ -40,7 +41,7 @@ const Navbar = () => {
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle text-slate-100"
+              className="btn btn-ghost btn-circle text-slate-700 dark:text-slate-100"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,30 +62,35 @@ const Navbar = () => {
               tabIndex={0}
               className="
                 menu menu-sm dropdown-content
-                mt-3 w-52 rounded-2xl border border-white/15
-                bg-slate-900/95 shadow-xl backdrop-blur-xl
+                mt-3 w-52 rounded-2xl border
+                bg-white/95 text-slate-900
+                border-slate-200 shadow-xl backdrop-blur-xl
+                dark:bg-slate-900/95 dark:text-slate-100
+                dark:border-white/15
                 z-[80] p-2
               "
             >
               <li>
-                <Link to="/#features" className="text-slate-100">Features</Link>
+                <Link to="/#features">Features</Link>
               </li>
               <li>
-                <Link to="/#how-it-works" className="text-slate-100">How it works</Link>
+                <Link to="/#how-it-works">How it works</Link>
               </li>
               <li>
-                <Link to="/scan" className="text-slate-100">Scan Food</Link>
+                <Link to="/scan">Scan Food</Link>
               </li>
               <li>
-                <Link to="/#pricing" className="text-slate-100">Pricing</Link>
+                <Link to="/#pricing">Pricing</Link>
               </li>
               {!isAuthenticated && (
                 <>
-                  <li className="mt-2 border-t border-white/10 pt-2">
-                    <Link to="/login" className="text-slate-100">Log in</Link>
+                  <li className="mt-2 border-t border-slate-200 pt-2 dark:border-white/10">
+                    <Link to="/login">Log in</Link>
                   </li>
                   <li>
-                    <Link to="/signup" className="text-emerald-400">Sign up</Link>
+                    <Link to="/signup" className="text-emerald-500">
+                      Sign up
+                    </Link>
                   </li>
                 </>
               )}
@@ -104,10 +110,14 @@ const Navbar = () => {
               />
             </div>
             <div className="flex flex-col leading-tight">
-              <h2 className="text-sm font-bold text-lime-300">
-                Chef<span className="text-emerald-400">laa</span>
+              {/* ✅ Cheflaa লেখা brand colour */}
+              <h2 className="text-sm font-bold">
+                <span className="text-[#1B4332] dark:text-[#D8F3DC]">
+                  Chef
+                </span>
+                <span className="text-[#FF7043]">laa</span>
               </h2>
-              <span className="text-[11px] text-slate-200/80 sm:text-xs">
+              <span className="text-[11px] text-slate-500 dark:text-slate-300 sm:text-xs">
                 AI-native kitchen copilot
               </span>
             </div>
@@ -120,7 +130,7 @@ const Navbar = () => {
             <li>
               <Link
                 to="/#features"
-                className="text-slate-100/80 hover:text-white"
+                className="text-slate-700 hover:text-[#1B4332] dark:text-slate-100/80 dark:hover:text-white"
               >
                 Features
               </Link>
@@ -128,31 +138,31 @@ const Navbar = () => {
             <li>
               <Link
                 to="/#how-it-works"
-                className="text-slate-100/80 hover:text-white"
+                className="text-slate-700 hover:text-[#1B4332] dark:text-slate-100/80 dark:hover:text-white"
               >
                 How it works
               </Link>
             </li>
             <li>
-              <Link 
-                to="/scan" 
-                className="text-slate-100/80 hover:text-white"
+              <Link
+                to="/scan"
+                className="text-slate-700 hover:text-[#1B4332] dark:text-slate-100/80 dark:hover:text-white"
               >
                 Scan
               </Link>
             </li>
             <li>
-              <Link 
-                to="/#pricing" 
-                className="text-slate-100/80 hover:text-white"
+              <Link
+                to="/#pricing"
+                className="text-slate-700 hover:text-[#1B4332] dark:text-slate-100/80 dark:hover:text-white"
               >
                 Pricing
               </Link>
             </li>
             <li>
-              <Link 
-                to="/#faq" 
-                className="text-slate-100/80 hover:text-white"
+              <Link
+                to="/#faq"
+                className="text-slate-700 hover:text-[#1B4332] dark:text-slate-100/80 dark:hover:text-white"
               >
                 FAQ
               </Link>
@@ -167,7 +177,7 @@ const Navbar = () => {
             type="button"
             onClick={toggleTheme}
             aria-label="Toggle dark and light mode"
-            className="btn btn-ghost btn-circle text-slate-100"
+            className="btn btn-ghost btn-circle text-slate-700 dark:text-slate-100"
           >
             <SunIcon
               className={`h-5 w-5 transition-opacity ${
@@ -186,18 +196,23 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => setShowUserMenu(!showUserMenu)}
-                className="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 py-1 pl-1 pr-3 transition hover:bg-white/20"
+                className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 py-1 pl-1 pr-3 text-slate-800 transition hover:bg-white dark:border-white/15 dark:bg-slate-800/90 dark:text-slate-100 dark:hover:bg-slate-700"
               >
                 <img
-                  src={user?.avatar || `https://ui-avatars.com/api/?name=${user?.name}&background=random`}
+                  src={
+                    user?.avatar ||
+                    `https://ui-avatars.com/api/?name=${user?.name}&background=random`
+                  }
                   alt={user?.name}
-                  className="h-8 w-8 rounded-full object-cover ring-2 ring-emerald-400/50"
+                  className="h-8 w-8 rounded-full object-cover ring-2 ring-[#FF7043]/70"
                 />
-                <span className="hidden text-sm font-medium text-slate-100 sm:block">
+                <span className="hidden text-sm font-medium sm:block">
                   {user?.name?.split(" ")[0]}
                 </span>
                 <svg
-                  className={`h-4 w-4 text-slate-300 transition-transform ${showUserMenu ? "rotate-180" : ""}`}
+                  className={`h-4 w-4 text-slate-500 transition-transform dark:text-slate-300 ${
+                    showUserMenu ? "rotate-180" : ""
+                  }`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -214,13 +229,15 @@ const Navbar = () => {
                     className="fixed inset-0 z-[70]"
                     onClick={() => setShowUserMenu(false)}
                   />
-                  
+
                   {/* Menu */}
-                  <div className="absolute right-0 top-full z-[80] mt-2 w-56 rounded-2xl border border-white/15 bg-slate-900/95 p-2 shadow-xl backdrop-blur-xl">
+                  <div className="absolute right-0 top-full z-[80] mt-2 w-56 rounded-2xl border border-slate-200 bg-white/95 p-2 text-slate-900 shadow-xl backdrop-blur-xl dark:border-white/15 dark:bg-slate-900/95 dark:text-slate-100">
                     {/* User info */}
-                    <div className="mb-2 border-b border-white/10 px-3 pb-3 pt-2">
-                      <p className="text-sm font-semibold text-slate-100">{user?.name}</p>
-                      <p className="text-xs text-slate-400">{user?.email}</p>
+                    <div className="mb-2 border-b border-slate-200 px-3 pb-3 pt-2 dark:border-white/10">
+                      <p className="text-sm font-semibold">{user?.name}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                        {user?.email}
+                      </p>
                     </div>
 
                     {/* Menu items */}
@@ -229,7 +246,7 @@ const Navbar = () => {
                         <Link
                           to="/profile"
                           onClick={() => setShowUserMenu(false)}
-                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition hover:bg-slate-100 dark:hover:bg-white/10"
                         >
                           <span className="text-lg">👤</span>
                           My Profile
@@ -239,7 +256,7 @@ const Navbar = () => {
                         <Link
                           to="/saved-recipes"
                           onClick={() => setShowUserMenu(false)}
-                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition hover:bg-slate-100 dark:hover:bg-white/10"
                         >
                           <span className="text-lg">💾</span>
                           Saved Recipes
@@ -249,7 +266,7 @@ const Navbar = () => {
                         <Link
                           to="/scan-history"
                           onClick={() => setShowUserMenu(false)}
-                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition hover:bg-slate-100 dark:hover:bg-white/10"
                         >
                           <span className="text-lg">📷</span>
                           Scan History
@@ -259,7 +276,7 @@ const Navbar = () => {
                         <Link
                           to="/settings"
                           onClick={() => setShowUserMenu(false)}
-                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition hover:bg-slate-100 dark:hover:bg-white/10"
                         >
                           <span className="text-lg">⚙️</span>
                           Settings
@@ -268,10 +285,10 @@ const Navbar = () => {
                     </ul>
 
                     {/* Logout */}
-                    <div className="mt-2 border-t border-white/10 pt-2">
+                    <div className="mt-2 border-t border-slate-200 pt-2 dark:border-white/10">
                       <button
                         onClick={handleLogout}
-                        className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-red-400 transition hover:bg-red-500/10"
+                        className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm text-red-600 transition hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-500/10"
                       >
                         <span className="text-lg">🚪</span>
                         Log out
@@ -286,7 +303,7 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="btn btn-ghost btn-sm hidden text-slate-100/85 md:inline-flex"
+                className="btn btn-ghost btn-sm hidden text-slate-700 hover:text-[#1B4332] dark:text-slate-100/85 md:inline-flex"
               >
                 Log in
               </Link>
@@ -306,30 +323,14 @@ const Navbar = () => {
 };
 
 const SunIcon = (props) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={1.6}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" {...props}>
     <circle cx="12" cy="12" r="4" />
     <path d="M12 3v2.5M12 18.5V21M4.22 4.22L5.64 5.64M18.36 18.36l1.42 1.42M3 12h2.5M18.5 12H21M4.22 19.78L5.64 18.36M18.36 5.64l1.42-1.42" />
   </svg>
 );
 
 const MoonIcon = (props) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={1.6}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M21 12.79A8.5 8.5 0 0112.21 3 6.5 6.5 0 1019 15.79 8.46 8.46 0 0021 12.79z" />
   </svg>
 );
