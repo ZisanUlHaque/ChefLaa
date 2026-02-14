@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext(null);
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://chef-laa-server.vercel.app/api";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);

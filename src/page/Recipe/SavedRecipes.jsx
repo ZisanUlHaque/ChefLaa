@@ -17,7 +17,7 @@ const SavedRecipes = () => {
 
     const fetchSaved = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/saved-recipes", {
+        const res = await fetch("https://chef-laa-server.vercel.app/api/saved-recipes", {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -36,7 +36,7 @@ const SavedRecipes = () => {
 
   const handleRemove = async (slug) => {
     try {
-      await fetch(`http://localhost:5000/api/saved-recipes/${slug}`, {
+      await fetch(`https://chef-laa-server.vercel.app/api/saved-recipes/${slug}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }
       });

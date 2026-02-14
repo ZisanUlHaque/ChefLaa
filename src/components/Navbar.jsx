@@ -15,8 +15,25 @@ const Navbar = () => {
     navigate("/");
   };
 
+  // ✅ Section scroll helper (Features, How it works, Pricing, FAQ)
+  const handleSectionClick = (id) => {
+    const scrollToSection = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+
+    if (window.location.pathname !== "/") {
+      navigate("/");
+      setTimeout(scrollToSection, 50);
+    } else {
+      scrollToSection();
+    }
+  };
+
   return (
-    // ✅ সব পেজে sticky থাকবে
+    // সব পেজেই sticky
     <header className="sticky top-0 z-[60] flex justify-center px-4 pt-3">
       {/* Glass navbar card */}
       <div
@@ -71,16 +88,43 @@ const Navbar = () => {
               "
             >
               <li>
-                <Link to="/#features">Features</Link>
+                <button
+                  type="button"
+                  onClick={() => handleSectionClick("features")}
+                  className="text-left"
+                >
+                  Features
+                </button>
               </li>
               <li>
-                <Link to="/#how-it-works">How it works</Link>
+                <button
+                  type="button"
+                  onClick={() => handleSectionClick("how-it-works")}
+                  className="text-left"
+                >
+                  How it works
+                </button>
               </li>
               <li>
                 <Link to="/scan">Scan Food</Link>
               </li>
               <li>
-                <Link to="/#pricing">Pricing</Link>
+                <button
+                  type="button"
+                  onClick={() => handleSectionClick("pricing")}
+                  className="text-left"
+                >
+                  Pricing
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleSectionClick("faq")}
+                  className="text-left"
+                >
+                  FAQ
+                </button>
               </li>
               {!isAuthenticated && (
                 <>
@@ -110,7 +154,7 @@ const Navbar = () => {
               />
             </div>
             <div className="flex flex-col leading-tight">
-              {/* ✅ Cheflaa লেখা brand colour */}
+              {/* Cheflaa brand text */}
               <h2 className="text-sm font-bold">
                 <span className="text-[#1B4332] dark:text-[#D8F3DC]">
                   Chef
@@ -128,20 +172,22 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal gap-4 px-1 text-sm font-medium">
             <li>
-              <Link
-                to="/#features"
+              <button
+                type="button"
+                onClick={() => handleSectionClick("features")}
                 className="text-slate-700 hover:text-[#1B4332] dark:text-slate-100/80 dark:hover:text-white"
               >
                 Features
-              </Link>
+              </button>
             </li>
             <li>
-              <Link
-                to="/#how-it-works"
+              <button
+                type="button"
+                onClick={() => handleSectionClick("how-it-works")}
                 className="text-slate-700 hover:text-[#1B4332] dark:text-slate-100/80 dark:hover:text-white"
               >
                 How it works
-              </Link>
+              </button>
             </li>
             <li>
               <Link
@@ -152,20 +198,22 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link
-                to="/#pricing"
+              <button
+                type="button"
+                onClick={() => handleSectionClick("pricing")}
                 className="text-slate-700 hover:text-[#1B4332] dark:text-slate-100/80 dark:hover:text-white"
               >
                 Pricing
-              </Link>
+              </button>
             </li>
             <li>
-              <Link
-                to="/#faq"
+              <button
+                type="button"
+                onClick={() => handleSectionClick("faq")}
                 className="text-slate-700 hover:text-[#1B4332] dark:text-slate-100/80 dark:hover:text-white"
               >
                 FAQ
-              </Link>
+              </button>
             </li>
           </ul>
         </div>
@@ -256,7 +304,7 @@ const Navbar = () => {
                         <Link
                           to="/saved-recipes"
                           onClick={() => setShowUserMenu(false)}
-                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition hover:bg-slate-100 dark:hover:bg-white/10"
+                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition hover:bg-slate-100 dark:hover:bg.white/10"
                         >
                           <span className="text-lg">💾</span>
                           Saved Recipes
@@ -266,7 +314,7 @@ const Navbar = () => {
                         <Link
                           to="/scan-history"
                           onClick={() => setShowUserMenu(false)}
-                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition hover:bg-slate-100 dark:hover:bg-white/10"
+                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition hover:bg-slate-100 dark:hover:bg.white/10"
                         >
                           <span className="text-lg">📷</span>
                           Scan History
@@ -276,7 +324,7 @@ const Navbar = () => {
                         <Link
                           to="/settings"
                           onClick={() => setShowUserMenu(false)}
-                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition hover:bg-slate-100 dark:hover:bg-white/10"
+                          className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition hover:bg-slate-100 dark:hover:bg.white/10"
                         >
                           <span className="text-lg">⚙️</span>
                           Settings

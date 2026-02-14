@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar";
+import ManualScanMarquee from "../../components/ManualScanMarquee";
 
 const ScanPage = () => {
   const [imageUrl, setImageUrl] = useState(null);
@@ -104,10 +105,10 @@ const ScanPage = () => {
         headers["Authorization"] = `Bearer ${token}`;
       }
 
-      const response = await fetch("http://localhost:5000/api/scan", {
+      const response = await fetch("https://chef-laa-server.vercel.app/api/scan", {
         method: "POST",
         headers,
-        body: formData
+        body: formData,
       });
 
       const data = await response.json().catch(() => null);
@@ -140,15 +141,22 @@ const ScanPage = () => {
   };
 
   return (
-    <section className="
+    <section
+      className="
     relative min-h-screen
     bg-base-100 text-base-content
     dark:bg-[#020b0b] dark:text-slate-100
     transition-colors duration-300
-  ">      {/* Background decoration */}
+  "
+    >
+      {" "}
+      {/* Background decoration */}
+      <div className="mt-5">
+        {" "}
+        <ManualScanMarquee></ManualScanMarquee>
+      </div>
       <div className="pointer-events-none absolute -top-40 left-1/4 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-40 right-1/4 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl" />
-
       <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-20">
         {/* Page Header */}
         <div className="mb-10 text-center">
@@ -156,15 +164,16 @@ const ScanPage = () => {
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
             AI-Powered Scanning
           </span>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-50 sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-shadow-amber-50 sm:text-5xl">
             Snap your fridge,{" "}
             <span className="bg-gradient-to-r from-[#FF7043] via-[#FF8A65] to-[#FFD1A3] bg-clip-text text-transparent">
               cook like a chef.
             </span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base text-slate-400">
-            Upload a photo of your ingredients. SmartChef will detect what's inside and 
-            generate personalized recipes with complete macros and step-by-step instructions.
+            Upload a photo of your ingredients. SmartChef will detect what's
+            inside and generate personalized recipes with complete macros and
+            step-by-step instructions.
           </p>
         </div>
 
@@ -191,7 +200,11 @@ const ScanPage = () => {
               <FeatureCard
                 icon="💾"
                 title="Save Favorites"
-                desc={isAuthenticated ? "Logged in - recipes will be saved!" : "Sign in to save recipes"}
+                desc={
+                  isAuthenticated
+                    ? "Logged in - recipes will be saved!"
+                    : "Sign in to save recipes"
+                }
               />
             </div>
 
@@ -213,7 +226,9 @@ const ScanPage = () => {
 
             {/* Tips */}
             <div className="rounded-2xl border border-slate-700/50 bg-slate-900/50 p-5">
-              <h3 className="mb-3 text-sm font-semibold text-slate-200">📸 Photo Tips</h3>
+              <h3 className="mb-3 text-sm font-semibold text-slate-200">
+                📸 Photo Tips
+              </h3>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li className="flex items-start gap-2">
                   <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400" />
@@ -238,11 +253,12 @@ const ScanPage = () => {
               className={`
                 relative flex min-h-[320px] w-full cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed
                 px-6 text-center transition-all duration-300
-                ${dragActive
-                  ? "border-emerald-400 bg-emerald-500/10 scale-[1.02]"
-                  : imageUrl
-                    ? "border-slate-600 bg-slate-900/60"
-                    : "border-slate-600/80 bg-slate-950/80 hover:border-slate-500 hover:bg-slate-900/70"
+                ${
+                  dragActive
+                    ? "border-emerald-400 bg-emerald-500/10 scale-[1.02]"
+                    : imageUrl
+                      ? "border-slate-600 bg-slate-900/60"
+                      : "border-slate-600/80 bg-slate-950/80 hover:border-slate-500 hover:bg-slate-900/70"
                 }
                 shadow-[0_20px_60px_rgba(0,0,0,0.7)] backdrop-blur-sm
               `}
@@ -265,9 +281,15 @@ const ScanPage = () => {
                     </p>
                   </div>
                   <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500">
-                    <span className="rounded-full bg-slate-800/80 px-3 py-1">JPEG</span>
-                    <span className="rounded-full bg-slate-800/80 px-3 py-1">PNG</span>
-                    <span className="rounded-full bg-slate-800/80 px-3 py-1">WebP</span>
+                    <span className="rounded-full bg-slate-800/80 px-3 py-1">
+                      JPEG
+                    </span>
+                    <span className="rounded-full bg-slate-800/80 px-3 py-1">
+                      PNG
+                    </span>
+                    <span className="rounded-full bg-slate-800/80 px-3 py-1">
+                      WebP
+                    </span>
                   </div>
                 </div>
               ) : (
@@ -278,7 +300,7 @@ const ScanPage = () => {
                     className="h-full min-h-[280px] w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  
+
                   {/* Overlay info */}
                   <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                     <span className="rounded-full bg-black/70 px-3 py-1.5 text-xs text-slate-100 backdrop-blur-sm">
@@ -354,9 +376,10 @@ const ScanPage = () => {
                 className={`
                   inline-flex flex-1 items-center justify-center gap-2 rounded-2xl px-6 py-4 text-sm font-semibold
                   transition-all duration-300 shadow-lg
-                  ${fileRef.current && !loading
-                    ? "bg-gradient-to-r from-[#FF7043] to-[#FF8A65] text-white shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02]"
-                    : "cursor-not-allowed bg-slate-800 text-slate-500"
+                  ${
+                    fileRef.current && !loading
+                      ? "bg-gradient-to-r from-[#FF7043] to-[#FF8A65] text-white shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02]"
+                      : "cursor-not-allowed bg-slate-800 text-slate-500"
                   }
                 `}
               >
@@ -399,7 +422,9 @@ const ScanPage = () => {
                 <div className="flex items-center gap-3 rounded-2xl bg-emerald-500/10 p-4">
                   <span className="text-2xl">✨</span>
                   <div>
-                    <p className="font-semibold text-emerald-400">Scan Complete!</p>
+                    <p className="font-semibold text-emerald-400">
+                      Scan Complete!
+                    </p>
                     <p className="text-sm text-slate-400">
                       Found {scanResult.ingredients?.length || 0} ingredients
                     </p>
@@ -435,7 +460,11 @@ const ScanPage = () => {
                   </h3>
                   <div className="space-y-3">
                     {scanResult.recipes?.map((recipe, i) => (
-                      <RecipeCard key={i} recipe={recipe} onView={() => goToRecipe(recipe.slug)} />
+                      <RecipeCard
+                        key={i}
+                        recipe={recipe}
+                        onView={() => goToRecipe(recipe.slug)}
+                      />
                     ))}
                   </div>
                 </div>

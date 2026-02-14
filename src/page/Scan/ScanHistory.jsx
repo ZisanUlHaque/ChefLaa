@@ -18,7 +18,7 @@ const ScanHistory = () => {
 
     const fetchHistory = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/scan-history", {
+        const res = await fetch("https://chef-laa-server.vercel.app/api/scan-history", {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();

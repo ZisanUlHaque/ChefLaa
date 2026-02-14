@@ -19,7 +19,7 @@ const RecipeDetails = () => {
       try {
         setLoading(true);
         setError("");
-        const res = await fetch(`http://localhost:5000/api/recipes/${id}`);
+        const res = await fetch(`https://chef-laa-server.vercel.app/api/recipes/${id}`);
         const data = await res.json().catch(() => null);
 
         if (!res.ok || !data) {
@@ -46,7 +46,7 @@ const RecipeDetails = () => {
 
     setSaving(true);
     try {
-      const res = await fetch("http://localhost:5000/api/saved-recipes", {
+      const res = await fetch("https://chef-laa-server.vercel.app/api/saved-recipes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
